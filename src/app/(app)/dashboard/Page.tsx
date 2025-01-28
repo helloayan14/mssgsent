@@ -60,7 +60,7 @@ const fetchacceptmessage=useCallback(async()=>{
     finally{    
         setisSwitchingloading(false)
     }
-},[setValue])
+},[setValue,toast])
 
 const fetchmesssages=useCallback(async(refresh:boolean = false   )=>{
     setIsloading(true)
@@ -85,7 +85,7 @@ const fetchmesssages=useCallback(async(refresh:boolean = false   )=>{
         setIsloading(false)
         setisSwitchingloading(false)
     }
-},[setIsloading,setMessages])
+},[setIsloading,setMessages,toast])
 
     useEffect(()=>{
         fetchacceptmessage()

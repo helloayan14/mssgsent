@@ -18,7 +18,7 @@ import { signIn } from "next-auth/react"
 
 import Link from "next/link"
 
-const page=() => {
+const Page=() => {
   
   const { toast } = useToast()
 
@@ -147,4 +147,4 @@ render={({ field }) => (
 }
 
 
-export default page
+export default Page

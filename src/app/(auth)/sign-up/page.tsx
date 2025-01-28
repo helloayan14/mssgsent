@@ -18,7 +18,7 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/Button"
 import { Loader2 } from "lucide-react"
 
-const page=() => {
+const Page=() => {
   const [username,setUsername]=useState('')
   // for the suggestion message the username is unique or not on backend side
   const [usernamemssg,setUsernamemssg]=useState('')
@@ -88,7 +88,7 @@ const form=useForm<z.infer<typeof signupSchema>>({
   } catch (error) {
     console.error("Error in signup error",error)  
     const axioserror=error as AxiosError<ApiResponse>
-    let errormessage=axioserror.response?.data.message ?? "something went wrong"
+    const errormessage=axioserror.response?.data.message ?? "something went wrong"
     toast({
       title:"Signup error",
       description:errormessage,
@@ -199,4 +199,4 @@ const form=useForm<z.infer<typeof signupSchema>>({
   )
 }
 
-export default page
+export default Page

@@ -7,7 +7,7 @@ import dbConnect from "@/lib/dbConnect";
 
 
 // for toggling the user choice to accept the message status or not
-export async function POST(req: Request) {
+export async function POST(request: Request) {
     await dbConnect()
 
    const session=await getServerSession(authOptions)
@@ -22,7 +22,7 @@ export async function POST(req: Request) {
    }
 
    const userid=user._id
-   const {choice}=await req.json()
+   const {choice}=await request.json()
    try {
     const updateduser=await UserModel.findByIdAndUpdate(userid,{isacceptingmssg:choice},{new:true})
     if (!updateduser){
