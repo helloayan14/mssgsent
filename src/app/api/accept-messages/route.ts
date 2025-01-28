@@ -56,7 +56,7 @@ export async function POST(request: Request) {
 
 }
 // checking the status of user
-export async function GET(req: Request) {
+export async function GET() {
     await dbConnect()
 
     const session=await getServerSession(authOptions)
