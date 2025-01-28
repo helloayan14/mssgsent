@@ -26,54 +26,53 @@ import { Message } from "@/model/User";
 import { useToast } from "@/hooks/use-toast";
 import axios from "axios";
 import { ApiResponse } from "@/types/ApiResponse";
+import { Mail } from "lucide-react";
 
 
 type MessageCardProps = {
   message:Message;
   onMessageDelete:(messageId:string)=>void
+  sender?:string
   // here the void does not means null it means it could be anything we dont know 
 }
-const MessageCard = ({message,onMessageDelete}:MessageCardProps) => {
+const MessageCard = ({message,onMessageDelete,sender}:MessageCardProps) => {
   const {toast} = useToast()
   const handledeleteconfirm=async()=>{
 const response=   await  axios.delete<ApiResponse>(`/api/deletemessages/${message._id }`)
    toast({
-    title:response.data.message
-    
-   })
+    title:response.data.message,
+    variant:"default"
+     })
 
    onMessageDelete(message._id as string)
   }
     return (
         <Card>
-  <CardHeader>
-    <CardTitle>Card Title</CardTitle>
+  <CardHeader> 
+    <CardTitle className="mx-auto"> Message from {sender}</CardTitle>
+    <CardContent> {message.content}</CardContent>
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button variant="destructive"><X className="w-4 h-4"/></Button>
+        <Button variant="destructive" className="w-full md:w-auto">Delete<X className="w-4 h-4"/></Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
           <AlertDialogDescription>
             This action cannot be undone. This will permanently delete your
-            account and remove your data from our servers.
+            Message.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction onClick={handledeleteconfirm}>Continue</AlertDialogAction>
+          <AlertDialogAction onClick={handledeleteconfirm} className="bg-red-600 focus:ring-red-600">Continue</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
-    <CardDescription>Card Description</CardDescription>
+    <CardDescription>Recieved at {new Date(message.createdAt).toLocaleString()}</CardDescription>
   </CardHeader>
-  <CardContent>
-    <p>Card Content</p>
-  </CardContent>
-  <CardFooter>
-    <p>Card Footer</p>
-  </CardFooter>
+
+
 </Card>
 
     )

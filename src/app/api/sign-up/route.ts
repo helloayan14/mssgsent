@@ -13,7 +13,7 @@ export async function POST(request: Request) {
       const {username,email,password} = await request.json()
       const existinguserverfiedbyusername=await UserModel.findOne({username,isverified:true})
       if (existinguserverfiedbyusername){
-        return Response.json({success:false,message:"username already exists"},
+        return Response.json({success:false,message:"Username already exists"},
             {
                 status:400
             }
@@ -75,7 +75,7 @@ export async function POST(request: Request) {
 )
       
     } catch (error) {
-        console.error("error creating user",error);
+        console.error("Error in creating user",error);
         return Response.json({success:false,message:"failed creating user"},
             {
                 status:500

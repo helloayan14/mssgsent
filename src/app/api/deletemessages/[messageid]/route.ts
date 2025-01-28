@@ -13,7 +13,7 @@ export async function DELETE(req: Request,{params}:{params:{messageid:string}}) 
     if (!session || !user){
          return Response.json({
              success:false,
-             message:"not authenticated",
+             message:"Not authenticated",
          },{
              status:401
          })   
@@ -28,14 +28,14 @@ export async function DELETE(req: Request,{params}:{params:{messageid:string}}) 
         if (updatedresult.modifiedCount===0){
             return Response.json({
                 success:false,
-                message:"message not found or deleted already",
+                message:"Message not found or deleted already",
             },{
                 status:404
             })
         }else{
             return Response.json({
                 success:true,
-                message:"message deleted successfully",
+                message:"Message deleted successfully",
             },{
                 status:200,
              
@@ -43,10 +43,10 @@ export async function DELETE(req: Request,{params}:{params:{messageid:string}}) 
         }
         
     } catch (error){
-                 console.error("error deleting message",error)
+                 console.error("Error deleting message",error)
                  return Response.json({
                      success:false,
-                     message:"something went wrong",
+                     message:"Something went wrong",
                  },{
                      status:500,
                  }

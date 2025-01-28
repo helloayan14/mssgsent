@@ -14,7 +14,6 @@ import { signupSchema } from "@/schemas/signUpSchema"
 import axios,{AxiosError} from "axios"
 import { ApiResponse } from "@/types/ApiResponse"
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
-
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/Button"
 import { Loader2 } from "lucide-react"
@@ -39,16 +38,16 @@ const page=() => {
 
   // zod implementation
   // it will give info like the schema given
-  const form=useForm<z.infer<typeof signupSchema>>({
-    resolver:zodResolver(
-      signupSchema
-    ),
-    defaultValues:{
-      username:'',
-      email:'',
-      password:'',
-    }
-  })
+const form=useForm<z.infer<typeof signupSchema>>({
+  resolver:zodResolver(
+    signupSchema
+  ),
+  defaultValues:{
+    username:'',
+    email:'',
+    password:'',
+  }
+})
 
   useEffect(() => {
      const checkusername=async () => {
@@ -72,32 +71,32 @@ const page=() => {
   };  checkusername()
 },  [username])
      
-   const onsubmit=async(data:z.infer<typeof signupSchema>)=>{
-    setIssubmitting(true)
-    console.log(data)
-    try {
-      const response=await axios.post<ApiResponse>("/api/sign-up",data)
-      setUsernamemssg(response.data.message);
-      toast({
-        title:"success",
-        description:response.data.message,
+  const onsubmit=async(data:z.infer<typeof signupSchema>)=>{
+  setIssubmitting(true)
 
-      })
+  try {
+    const response=await axios.post<ApiResponse>("/api/sign-up",data)
+    setUsernamemssg(response.data.message);
+    toast({
+      title:"Successfully filled details",
+      description:response.data.message,
 
-      router.replace(`/verify/${username}`)
-      setIssubmitting(false)
-    } catch (error) {
-      console.error("error in signup error",error)  
-      const axioserror=error as AxiosError<ApiResponse>
-      let errormessage=axioserror.response?.data.message ?? "something went wrong"
-      toast({
-        title:"signup error",
-        description:errormessage,
-        variant:"destructive"
-      })
-      setIssubmitting(false)
-    }
-   }
+    })
+
+    router.replace(`/verify/${username}`)
+    setIssubmitting(false)
+  } catch (error) {
+    console.error("Error in signup error",error)  
+    const axioserror=error as AxiosError<ApiResponse>
+    let errormessage=axioserror.response?.data.message ?? "something went wrong"
+    toast({
+      title:"Signup error",
+      description:errormessage,
+      variant:"destructive"
+    })
+    setIssubmitting(false)
+  }
+  }
   return(
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
       <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md">
@@ -105,7 +104,7 @@ const page=() => {
         <div className="text-center">
           <h1 className="text-4xl font-extrabold 
           tracking-tight lg:text-5xl mb-6">
-            Join Mystery Message
+            Join Mssg Sent
 
           </h1>
           <p className="mb-4">Sign up to start your anonymous conversation</p>
@@ -133,10 +132,10 @@ const page=() => {
       </FormControl>
       {ischeckingusername && <Loader2 className="animate-spin"/>}
 
-       <p className={`text-sm ${usernamemssg==="username is unique" ? 'text-green-500' : 'text-red-500'}`}>
+       <p className={`text-sm ${usernamemssg==="username is unique" ? 'text-green-600' : 'text-red-600'}`}>
          {usernamemssg}
        </p>
-      <FormDescription>This is your public display name.</FormDescription>
+      <FormDescription>Your Anonymous name.</FormDescription>
       <FormMessage />
     </FormItem>
   )}
@@ -154,7 +153,7 @@ const page=() => {
         <Input placeholder="email" {...field}
         />
       </FormControl>
-      <FormDescription>This is your email of this account.</FormDescription>
+      <FormDescription></FormDescription>
       <FormMessage />
     </FormItem>
   )}
@@ -171,7 +170,7 @@ const page=() => {
         />
 
       </FormControl>
-      <FormDescription>This is your password of this account.</FormDescription>
+      <FormDescription></FormDescription>
       <FormMessage />
     </FormItem>
   )}
@@ -180,7 +179,7 @@ const page=() => {
 {
   issubmitting ? (
   <>
-  <Loader2 className="mr-2 h-4 w-4 animate-spin"/>please wait 
+  <Loader2 className="mr-2 h-4 w-4 animate-spin"/>Please wait 
   
   </>
   ) :('sign up')

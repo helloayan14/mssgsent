@@ -17,7 +17,6 @@ import { signInSchema } from "@/schemas/signInSchema"
 import { signIn } from "next-auth/react"
 
 import Link from "next/link"
-import Credentials from "next-auth/providers/credentials"
 
 const page=() => {
   
@@ -27,107 +26,123 @@ const page=() => {
 
   // zod implementation
   // it will give info like the schema given
-  const form=useForm<z.infer<typeof signInSchema>>({
-    resolver:zodResolver(
-      signInSchema
-    ),
-    defaultValues:{
-      email:'',
-      password:'',
-    }
-  })
+const form=useForm<z.infer<typeof signInSchema>>({
+  resolver:zodResolver(
+    signInSchema
+  ),
+  defaultValues:{
+    email:'',
+    password:'',
+  }
+})
      
-   const onsubmit=async(data:z.infer<typeof signInSchema>)=>{
-  //  here we use next auth  signup was manual process
- 
-   const result= await signIn("credentials",{
-      email:data.email,
-      password:data.password,
-      redirect:false
-    })
-    console.log(result)
-   if (result?.error){
-       if (result.error === 'CredentialsSignin') {                                      
-        toast({
-      title:"error credentials entered ",
-      description:"something went wrong in sign in"
-    })} else {
+  
+  const onsubmit=async(data:z.infer<typeof signInSchema>)=>{
+//  here we use next auth  signup was manual process
+try{
+  const result= await signIn("credentials",{
+    email:data.email,
+    password:data.password,
+    redirect:false
+  })
+  
+  if (result?.error){
+      if (result.error === 'CredentialsSignin') {                                      
       toast({
-        title:"error",
-        description:"something went wrong in sign in"
-      })
-    }
-   }
-   if (result?.url){
-    router.replace('/dashboard')
-   }}
+    title:"Credentials error",
+    description:"something went wrong in sign in"
+  })} else {
+    toast({
+      title:"Not a Credential error",
+      description:"Something other prolbem"
+    })
+  }}
+
+   
+     
+  if (result?.url){
+  
+  toast({
+    title:"Authorized ",
+    description:"Signed in successfully"
+  })
+  router.replace('/dashboard')
+  }}
+catch (error) {
+console.log("Error in sign in",error)
+  toast({
+    title:"Error of system",
+    description:"something went wrong in sign in"
+  })
+
+}}
   return(
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md">
+<div className="flex justify-center items-center min-h-screen bg-gray-100">
+  <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md">
 
-        <div className="text-center">
-          <h1 className="text-4xl font-extrabold 
-          tracking-tight lg:text-5xl mb-6">
-            Join Mystery Message
+    <div className="text-center">
+      <h1 className="text-4xl font-extrabold 
+      tracking-tight lg:text-5xl mb-6">
+        Join Mssg sent
 
-          </h1>
-          <p className="mb-4">Sign in to your account</p>
+      </h1>
+      <p className="mb-4">Sign in to your account</p>
 
-        </div>
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onsubmit)} className="space-y-6"> 
- 
+    </div>
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onsubmit)} className="space-y-6"> 
+
 
 
 <FormField
-           name="email"
-  control={form.control}
- 
-  render={({ field }) => (
-    <FormItem>
-      <FormLabel>Email</FormLabel>
-      <FormControl>
-        <Input  {...field}
-        />
-      </FormControl>
-      <FormDescription></FormDescription>
-      <FormMessage />
-    </FormItem>
-  )}
+        name="email"
+control={form.control}
+
+render={({ field }) => (
+<FormItem>
+  <FormLabel>Email</FormLabel>
+  <FormControl>
+    <Input  {...field}
+    />
+  </FormControl>
+  <FormDescription></FormDescription>
+  <FormMessage />
+</FormItem>
+)}
 />
 <FormField
-           name="password"
-  control={form.control}
- 
-  render={({ field }) => (
-    <FormItem>
-      <FormLabel>Password</FormLabel>
-      <FormControl>
-        <Input type="password" placeholder="password" {...field}
-        />
+        name="password"
+control={form.control}
 
-      </FormControl>
-      <FormDescription></FormDescription>
-      <FormMessage />
-    </FormItem>
-  )}
+render={({ field }) => (
+<FormItem>
+  <FormLabel>Password</FormLabel>
+  <FormControl>
+    <Input type="password" placeholder="password" {...field}
+    />
+
+  </FormControl>
+  <FormDescription></FormDescription>
+  <FormMessage />
+</FormItem>
+)}
 />  
-      <Button type="submit" >
-        Sign In
-      </Button>
+  <Button type="submit" >
+    Sign In
+  </Button>
 
-          </form>
-        </Form>
-        <div className="text-center mt-4">
-          <p>
-            Not a member yet?{' '}
-            <Link href="/sign-up" className="text-blue-600 hover:text-blue-800">
-              Sign up
-            </Link>
-          </p>
-        </div>
-      
-        </div> </div>
+      </form>
+    </Form>
+    <div className="text-center mt-4">
+      <p>
+        Not a member yet?{' '}
+        <Link href="/sign-up" className="text-blue-600 hover:text-blue-800">
+          Sign up
+        </Link>
+      </p>
+    </div>
+  
+    </div> </div>
   )
 }
 

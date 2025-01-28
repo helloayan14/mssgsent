@@ -3,12 +3,15 @@ import dbConnect from "@/lib/dbConnect";
 
 import { Message } from "@/model/User";
 
-async function POST(req: Request) {
+export async function POST(req: Request) {
     await dbConnect()
     const {username,content}=await req.json()
-
+   
+   
     try {
-          const user=await UserModel.findOne({username})
+          const user=await UserModel.findOne({username}).exec()
+          console.log(user) 
+
           if (!user){
             return Response.json({
                 success:false,
@@ -20,7 +23,7 @@ async function POST(req: Request) {
 
         //   is user is accepting messages or not
         if (!user.isacceptingmssg){
-            return Response.json({
+            return Response.json({                                                                                                                                          
                 success:false,
                 message:"user is not accepting messages",
             },{
@@ -37,7 +40,7 @@ async function POST(req: Request) {
         await user.save()
         return Response.json({
             success:true,
-            message:"message sent successfully",
+            message:"Message sent successfully",
         },{
             status:200
         })

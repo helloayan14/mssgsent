@@ -15,7 +15,7 @@ export async function POST(req: Request) {
    if (!session || !user){
         return Response.json({
             success:false,
-            message:"not authenticated",
+            message:"Not authenticated",
         },{
             status:401
         })   
@@ -28,7 +28,7 @@ export async function POST(req: Request) {
     if (!updateduser){
         return Response.json({
             success:false,
-            message:"user not found",
+            message:"User not found",
         },{
             status:404
         })
@@ -38,14 +38,14 @@ export async function POST(req: Request) {
 
     return Response.json({
         success:true,
-        message:"success accepting messages",
+        message:"successfully choosed  accepting messages",
         updateduser
     },{
         status:200
     })
 
    } catch (error) {
-    console.error("error accepting messages",error);
+    console.error("error in choosing accepting messages",error);
     return Response.json({
         success:false,
         message:"error accepting messages",

@@ -16,16 +16,16 @@ const connection: ConnectionObject = {};
 async function dbConnect(): Promise<void> {
 
     if (connection.isconnected) {
-        console.log("already connected database");
+        console.log("The Database is already connected to the server ");
         return;
     }
    try {
       const db = await mongoose.connect(process.env.MONGODB_URI || "",{});
-      console.log("hello")
+      console.log("Hello")
       connection.isconnected = db.connections[0].readyState
-      console.log("connected database");
+      console.log("Connected Database");
    } catch (error) {
-      console.log("database connection failed",error);
+      console.log("Database Connection failed",error);
       process.exit(1);
    }
 }

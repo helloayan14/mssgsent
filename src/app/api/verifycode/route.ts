@@ -12,7 +12,7 @@ export async function POST(request:Request) {
         if (!user){
             return Response.json({
                 success:false,
-                message:"could not find the user",
+                message:"Could not find the user",
 
             },{status:400})
 
@@ -31,21 +31,21 @@ export async function POST(request:Request) {
         }else if (!isexpiryvalid){
             return Response.json({
                 success:false,
-                message:"the verification date expired please signup again ",
+                message:"The Verification date expired please signup again ",
 
             },{status:400})
         }else{
             return Response.json({
                 success:false,
-                message:"incorrect code ",
+                message:"Wrong code",
 
             },{status:400})
         }
     } catch (error) {
-        console.error("error verifying user",error)
+        console.error("Error in  verifying user",error)
         return Response.json({
             success:false,
-            message:"error verifying user"
+            message:"Error verifying user"
         },
         {
             status:500

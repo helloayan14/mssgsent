@@ -37,7 +37,7 @@ export async function GET(request:Request) {
            if (existinguserverified){
             return Response.json({
                 success:false,
-                message:"username is already taken",
+                message:"Username is already taken",
     
             },{
                 status:400
@@ -46,7 +46,7 @@ export async function GET(request:Request) {
 
         return Response.json({
             success:true,
-            message:"username is unique",
+            message:"Username is unique",
 
         },{
             status:201
@@ -54,10 +54,10 @@ export async function GET(request:Request) {
     )
 
     } catch (error) {
-        console.error("error checking the username",error)
+        console.error("Error in checking the username",error)
         return Response.json({
             success:false,
-            message:"could not check the username",
+            message:"Could not check the username",
 
         },
         {

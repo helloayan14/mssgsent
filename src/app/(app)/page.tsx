@@ -7,7 +7,6 @@ import { Mail } from 'lucide-react'; // Assuming you have an icon for messages
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import Autoplay from 'embla-carousel-autoplay';
 import messages from '@/messages.json';
-
 import {
   Carousel,
   CarouselContent,
@@ -22,10 +21,10 @@ export default function Home() {
       <main className="flex-grow flex flex-col items-center justify-center px-4 md:px-24 py-48 bg-gray-800 text-white ">
         <section className="text-center mb-8 md:mb-12 ">
           <h1 className="text-3xl md:text-5xl font-bold ">
-            Dive into the World of Anonymous Feedback
+            Dive into the World of Anonymous Messaging
           </h1>
           <p className="mt-3 md:mt-4 text-base md:text-lg">
-            True Feedback - Where your identity remains a secret.
+            Mssg sent - Where your identity remains a secret.
           </p>
         </section>
 

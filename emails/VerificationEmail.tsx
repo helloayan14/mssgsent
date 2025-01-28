@@ -21,7 +21,7 @@ export default function VerificationEmail({ username, otp }: VerificationEmailPr
       <Head>
         <title>Verification Code</title>  
         <Font
-          fontFamily="Roboto"
+          fontFamily="Roboto "
           fallbackFontFamily="Verdana"
           webFont={{
             url: 'https://fonts.gstatic.com/s/roboto/v27/KFOmCnqEu92Fr1Mu4mxKKTU1Kg.woff2',
@@ -43,7 +43,7 @@ export default function VerificationEmail({ username, otp }: VerificationEmailPr
           </Text>
         </Row>
         <Row>
-          <Text>{otp}</Text> 
+          <Text>Your unique code is  {otp}</Text> 
         </Row>
         <Row>
           <Text>

@@ -36,7 +36,7 @@ export default function VerifyAccount() {
       });
 
       toast({
-        title: 'Success',
+        title: 'Successfully Verified',
         description: response.data.message,
       });
 

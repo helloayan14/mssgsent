@@ -19,7 +19,7 @@ export const authOptions:NextAuthOptions={
    
     providers:[
         CredentialsProvider({
-             id:"credentials",
+           
              name:"Credentials",
              credentials:{
                  email:{label:"Email",type:"text"},
@@ -29,22 +29,22 @@ export const authOptions:NextAuthOptions={
                  await dbConnect();
                try {
                   const user=await UserModel.findOne({
-                     $or:[{email:credentials.identfier},
-                         {username:credentials.identfier}],
+                     $or:[{email:credentials.email}],
                   })
                   if (!user){
-                     throw new Error("user not found")
+                     throw new Error("User not found")
                   }
                  if (!user.isverified){
-                    throw new Error("user not verified")
+                    throw new Error("User not verified")
                  }
                  const isPasswordMatched=await bcrypt.compare(credentials.password,user.password)
                  if (!isPasswordMatched){
-                    throw new Error("password not matched")
+                    throw new Error("Password not matched")
                  }
                  return user
                   
                } catch (error:any) {
+                    console.error("the error is ",error)
                     throw new Error("something went wrong",error)
                }
              }

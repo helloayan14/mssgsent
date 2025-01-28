@@ -12,7 +12,7 @@ export async function GET(req: Request) {
     if (!session || !user){
          return Response.json({
              success:false,
-             message:"not authenticated",
+             message:"Not authenticated",
          },{
              status:401
          })   
@@ -32,7 +32,7 @@ export async function GET(req: Request) {
         if (!user || user.length===0){
             return Response.json({
                 success:false,
-                message:"user not found",
+                message:"User has no messages",
             },{
                 status:404
             })
@@ -46,6 +46,10 @@ export async function GET(req: Request) {
             status:200
         })
     } catch (error) {
-        
+        console.error('An unexpected error occurred:', error);
+        return Response.json(
+            { message: 'Internal server error', success: false },
+            { status: 500 }
+          );
     }
 } 
