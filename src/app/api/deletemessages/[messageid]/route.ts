@@ -3,7 +3,7 @@ import { authOptions } from "../../auth/[...nextauth]/options";
 import UserModel from "@/model/User";
 import dbConnect from "@/lib/dbConnect";
  import { User } from "next-auth";
-import mongoose, { mongo } from "mongoose";
+
 
 export async function DELETE(req: Request,{params}:{params:{messageid:string}}) {
    const messageId= params.messageid

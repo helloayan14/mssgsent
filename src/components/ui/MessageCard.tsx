@@ -4,7 +4,7 @@ import {
     Card,
     CardContent,
     CardDescription,
-    CardFooter,
+   
     CardHeader,
     CardTitle,
   } from "@/components/ui/card"
@@ -26,7 +26,7 @@ import { Message } from "@/model/User";
 import { useToast } from "@/hooks/use-toast";
 import axios from "axios";
 import { ApiResponse } from "@/types/ApiResponse";
-import { Mail } from "lucide-react";
+
 
 
 type MessageCardProps = {

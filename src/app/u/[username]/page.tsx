@@ -18,7 +18,7 @@ import Link from "next/link";
 
 
 
-const page = () => {
+const Page = () => {
     const {toast} = useToast()
     const params = useParams<{ username: string }>();
    
@@ -59,9 +59,7 @@ const onsubmit=async(data:z.infer<typeof messageSchema>)=>{
               variant: 'destructive',
             });
   }
-  finally{
-    
-  }
+
     }
 
 
@@ -73,7 +71,7 @@ const onsubmit=async(data:z.infer<typeof messageSchema>)=>{
      const [error, setError] = useState('');
     
      const {register,watch,setValue}=form
-    const content=watch('content')
+    watch('content')
 const fetchsuggestion= async()=>{
     setissuggestionloading(true)
     setSuggestion([])
@@ -204,4 +202,4 @@ return (
 </>  )  
 };  
 
-export default page
+export default Page
