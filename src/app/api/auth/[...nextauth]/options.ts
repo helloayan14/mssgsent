@@ -13,20 +13,26 @@ import bcrypt from "bcryptjs";
 import dbConnect from "@/lib/dbConnect";
 import UserModel from "@/model/User";
 
-// import { getProviders } from "next-auth/react";
+
+import { UserReturn } from "@/types/Userreturn";
+
 
 export const authOptions:NextAuthOptions={
    
     providers:[
         CredentialsProvider({
-           
+             id:"credentials",
              name:"Credentials",
              credentials:{
                  email:{label:"Email",type:"text"},
                  password:{label:"password",type:"text",placeholder:"password"},
              },
-             async authorize(credentials:any):Promise<any>{
+             async authorize(credentials):Promise<UserReturn | null>{
+              
                  await dbConnect();
+                 if (!credentials?.email || !credentials.password){
+                    throw new Error("Email and password required")
+                 }
                try {
                   const user=await UserModel.findOne({
                      $or:[{email:credentials.email}],
@@ -41,11 +47,13 @@ export const authOptions:NextAuthOptions={
                  if (!isPasswordMatched){
                     throw new Error("Password not matched")
                  }
-                 return user
+                 console.log(user)
+                 return user as UserReturn
+                 
                   
-               } catch (error:any) {
+               } catch (error ) {
                     console.error("the error is ",error)
-                    throw new Error("something went wrong",error)
+                    throw new Error("something went wrong"+error)
                }
              }
         }),
