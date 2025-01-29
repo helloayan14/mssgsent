@@ -5,10 +5,13 @@ import dbConnect from "@/lib/dbConnect";
  import { User } from "next-auth";
 
 interface params{
-    messageid:string
+    params:{
+        messageid:string
+    }
+   
 }
 
-export async function DELETE(req:Request,{params}:{params:params}) {
+export async function DELETE(req:Request,{params}:params) {
    const messageId=params.messageid
    
 
