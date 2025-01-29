@@ -11,9 +11,9 @@ interface Params{
    
 }
 
-export async function DELETE({params}:Params) {
-   const messageId=params.messageid
-   
+export async function DELETE(request:Request,message:Params) {
+   const messageId=message.params.messageid
+   const headers=request.headers
 
     await dbConnect()
     const session=await getServerSession(authOptions)
@@ -38,7 +38,8 @@ export async function DELETE({params}:Params) {
                 success:false,
                 message:"Message not found or deleted already",
             },{
-                status:404
+                status:404,
+                headers
             })
         }else{
             return Response.json({
