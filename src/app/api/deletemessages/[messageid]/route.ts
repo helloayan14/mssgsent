@@ -11,7 +11,7 @@ interface Params{
    
 }
 
-export async function DELETE({params}:Params,req:Request) {
+export async function DELETE({params}:Params) {
    const messageId=params.messageid
    
 
