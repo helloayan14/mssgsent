@@ -24,7 +24,7 @@ import {
 import { X } from "lucide-react";
 import { Message } from "@/model/User";
 import { useToast } from "@/hooks/use-toast";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { ApiResponse } from "@/types/ApiResponse";
 
 
@@ -37,14 +37,27 @@ type MessageCardProps = {
 }
 const MessageCard = ({message,onMessageDelete,sender}:MessageCardProps) => {
   const {toast} = useToast()
+ 
   const handledeleteconfirm=async()=>{
-const response=   await  axios.delete<ApiResponse>(`/api/deletemessages/${message._id }`)
-   toast({
-    title:response.data.message,
-    variant:"default"
-     })
-
-   onMessageDelete(message._id as string)
+try {
+  const response=   await  axios.delete<ApiResponse>(`/api/deletemessages/${message._id }`)
+  console.log(response)
+     toast({
+      title:response.data.message,
+      variant:"default"
+       })
+      
+  
+     onMessageDelete(message._id as string)
+} catch (error) {
+  const axioserror=error as AxiosError<ApiResponse>
+  toast({
+    title:"Error in deleting message",
+    description:axioserror.response?.data.message || "something went wrong",
+    variant:"destructive"
+  })
+  
+}
   }
     return (
         <Card>
