@@ -6,8 +6,8 @@ import dbConnect from "@/lib/dbConnect";
 import { NextRequest } from "next/server";
 
 
-export async function DELETE(req: NextRequest,{params}:{params:{messageid:string}}) {
-   const messageId= params.messageid
+export async function DELETE(req: NextRequest,context:{params:{messageid:string}}) {
+   const messageId= context.params.messageid
     await dbConnect()
     const session=await getServerSession(authOptions)
     const user:User=session?.user
