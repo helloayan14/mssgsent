@@ -4,6 +4,7 @@ import UserModel from "@/model/User";
 import dbConnect from "@/lib/dbConnect";
  import { User } from "next-auth";
 
+
 interface Params{
     params:{
         messageid:string
@@ -11,25 +12,25 @@ interface Params{
    
 }
 
-export async function DELETE(request:Request,message:Params) {
-   const messageId=message.params.messageid
-   const headers=request.headers
-
-    await dbConnect()
-    const session=await getServerSession(authOptions)
-    const user:User=session?.user
-    if (!session || !user){
-         return Response.json({
-             success:false,
-             message:"Not authenticated",
-         },{                                                                            
-             status:401
-         })   
-    }
-     
-    try {
-       const updatedresult= await UserModel.updateOne(
-            {_id:user._id},
+    export async function DELETE(request:Request,{params:{messageid}}:Params) {
+    const messageId=messageid
+    const headers=request.headers
+   
+        await dbConnect()
+        const session=await getServerSession(authOptions)
+        const user:User=session?.user
+        if (!session || !user){
+            return Response.json({
+                success:false,
+                message:"Not authenticated",
+            },{                                                                            
+                status:401
+            })   
+        }
+        
+        try {
+        const updatedresult= await UserModel.updateOne(
+                {_id:user._id},
             {$pull:{messages:{_id:messageId}}}
         )
         
