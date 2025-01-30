@@ -30,7 +30,17 @@ export default function Page() {
 
 
 const handleDeleteMessage=async(messageId:string)=>{
-    setMessages(messages.filter((message)=>message._id!==messageId))
+  try {
+      setMessages((prevMessages) => prevMessages.filter((message) => message._id !== messageId))
+      await fetchmesssages(true)
+  } catch (error) {
+    console.error("Failed to delete message:", error);
+    toast({
+      title: "Error",
+      description: "Failed to delete message. Try again.",
+      variant: "destructive",
+    });
+  }
 }
 
 const {data:session}=useSession()

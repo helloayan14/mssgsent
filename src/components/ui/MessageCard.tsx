@@ -39,6 +39,10 @@ const MessageCard = ({message,onMessageDelete,sender}:MessageCardProps) => {
   const {toast} = useToast()
  
   const handledeleteconfirm=async()=>{
+
+    if (!message._id) {
+      return toast({ title: "Message ID is missing", variant: "destructive" });
+    }
 try {
   const response=await  axios.delete<ApiResponse>(`/api/deletemessages/${message._id as string}`)
   console.log(response)
