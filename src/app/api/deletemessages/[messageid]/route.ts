@@ -4,8 +4,9 @@ import UserModel from "@/model/User";
 import dbConnect from "@/lib/dbConnect";
  import { User } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
-
-
+export const config = {
+    runtime: "edge",
+  };
     export async function DELETE(request:NextRequest,{params}:{params:Promise<{messageid:string}>}) {
       const {messageid}= await params
     const headers=request.headers
