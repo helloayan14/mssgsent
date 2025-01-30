@@ -2,7 +2,7 @@ import dbConnect from "@/lib/dbConnect";
 import UserModel from "@/model/User";
 import {z} from "zod";
 import {usernamevalidate }from "@/schemas/signUpSchema";
-
+export const dynamic = "force-dynamic";
 
 
 const Usernamequeryschema = z.object({
