@@ -1,17 +1,20 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../auth/[...nextauth]/options";
-import UserModel from "@/model/User";
+import UserModel, { Message } from "@/model/User";
 import dbConnect from "@/lib/dbConnect";
  import { User } from "next-auth";
+import { NextRequest, NextResponse } from "next/server";
 
-
-    export async function DELETE(request:Request,context:{params:{messageid:string}} ) {
-      const {messageid}=context.params
+interface message extends Message{
+    params:{messageid:string}
+}
+    export async function DELETE(request:NextRequest,{params}:message) {
+      const {messageid}=params
     const headers=request.headers
    
         await dbConnect()
         const session=await getServerSession(authOptions)
-        const user:User=session?.user
+        const user:User=session?.user 
         if (!session || !user){
             return Response.json({
                 success:false,
@@ -28,7 +31,7 @@ import dbConnect from "@/lib/dbConnect";
         )
         
         if (updatedresult.modifiedCount===0){
-            return Response.json({
+            return NextResponse.json({
                 success:false,
                 message:"Message not found or deleted already",
             },{
@@ -36,7 +39,7 @@ import dbConnect from "@/lib/dbConnect";
                 headers
             })
         }else{
-            return Response.json({
+            return NextResponse.json({
                 success:true,
                 message:"Message deleted successfully",
             },{
@@ -47,7 +50,7 @@ import dbConnect from "@/lib/dbConnect";
         
     } catch (error){
                  console.error("Error deleting message",error)
-                 return Response.json({
+                 return NextResponse.json({
                      success:false,
                      message:"Something went wrong",
                  },{
