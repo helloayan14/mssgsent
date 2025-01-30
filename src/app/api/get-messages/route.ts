@@ -4,6 +4,7 @@ import UserModel from "@/model/User";
 import dbConnect from "@/lib/dbConnect";
  import { User } from "next-auth";
 import mongoose from "mongoose";
+export const dynamic = "force-dynamic";
 
 export async function GET() {
     await dbConnect()
