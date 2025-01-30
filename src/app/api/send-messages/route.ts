@@ -2,7 +2,7 @@ import UserModel from "@/model/User";
 import dbConnect from "@/lib/dbConnect";
 
 import { Message } from "@/model/User";
-export const dynamic = "force-dynamic";
+
 export async function POST(req: Request) {
     await dbConnect()
     const {username,content}=await req.json()
