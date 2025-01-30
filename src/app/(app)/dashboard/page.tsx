@@ -129,11 +129,15 @@ const handleswitchchange=async()=>{
   const {username}=session?.user || {}
 
 //  for url we have to first derive the base url is we are using local host or other
-  const baseurl=`${window.location.protocol}//${
-    window.location.host
-  }`
+const [baseurl, setBaseurl] = useState<string>("");
 
-  const profileurl=`${baseurl}/u/${username}`
+useEffect(() => {
+  if (typeof window !== "undefined") {
+    setBaseurl(`${window.location.protocol}//${window.location.host}`);
+  }
+}, []);
+
+const profileurl = baseurl ? `${baseurl}/u/${username}` :"";
 
 const copyToClipboard = () => {
     navigator.clipboard.writeText(profileurl);

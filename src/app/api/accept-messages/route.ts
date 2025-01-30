@@ -1,3 +1,6 @@
+export const config = {
+    runtime: "edge",
+  };
 import { getServerSession } from "next-auth";
 import { authOptions } from "../auth/[...nextauth]/options";
 import UserModel from "@/model/User";

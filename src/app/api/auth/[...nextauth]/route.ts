@@ -1,7 +1,9 @@
 // required file for any way of authentication
 import NextAuth from "next-auth/next";
 import { authOptions } from "./options";
-
+export const config = {
+    runtime: "edge",
+  };
 
 const handler=NextAuth(authOptions)
 
