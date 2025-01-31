@@ -17,15 +17,16 @@ mssgsent is a full-stack web application built with Next.js and TypeScript that 
 - **Authentication**: NextAuth
 - **AI Integration**: Cohere AI
 - **Email Services**: Resend
-- **Deployment**: [Specify if hosted on Vercel, AWS, etc.]
+- **Deployment**: [ Vercel]
 
 ## Installation
 
 1. Clone the repository:
 
    ```sh
-   git clone https://github.com/yourusername/mssgsent.git
-   cd mssgsent
+  https://github.com/helloayan14/mssgsent.git
+cd mssgsent     
+   
 2.Install dependencies   
 npm install
 # or
