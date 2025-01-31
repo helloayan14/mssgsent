@@ -21,11 +21,12 @@ mssgsent is a full-stack web application built with Next.js and TypeScript that 
 
 ## Installation
 
+
 1. Clone the repository:
 
    ```sh
-  https://github.com/helloayan14/mssgsent.git
-cd mssgsent     
+   git clone https://github.com/helloayan14/mssgsent.git
+   cd mssgsent   
    
 2.Install dependencies   
 npm install
