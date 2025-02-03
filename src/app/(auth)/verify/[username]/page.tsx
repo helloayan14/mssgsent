@@ -34,8 +34,9 @@ export default function VerifyAccount() {
         username: params.username,
         code: data.code,
       });
+      // console.log(response.data);
 
-      toast({
+      toast({ 
         title: 'Successfully Verified',
         description: response.data.message,
       });

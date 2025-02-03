@@ -5,7 +5,7 @@
 import dbConnect from "@/lib/dbConnect";
 import UserModel from "@/model/User";
 import bcrypt from "bcryptjs"; 
-import { sendVerificationEmail} from "@/helpers/sendVerificationEmail";
+import { sendVerificationEmail } from "@/helpers/sendVerificationEmail";
 
 export async function POST(request: Request) {
     await dbConnect();
@@ -60,6 +60,28 @@ export async function POST(request: Request) {
     //   send verification email
    const emailresponse= await sendVerificationEmail(email,username,verifycode)
 
+
+// Function to generate a 6-digit OTP
+
+
+//   const sendVerificationEmail = async (email: string,username:string,verifycode:string) => {
+//   try {
+//        const response= await emailjs.send(
+//       "service_xyqx8lq", // Replace with your EmailJS Service ID
+//       "template_z3otfok", // Replace with your EmailJS Template ID
+//       {
+//         username: username,
+//         otp: verifycode,
+//         email: email,
+//       },
+//       "xXgn7L2NKhZGjdk1h" // Replace with your EmailJS Public Key
+//     );
+
+//     return { success: true, message: "Verification email sent successfully" }; // Return the OTP to store for verification
+//   } catch (error) {
+//     console.error("Email sending failed:", error);
+//     return { success: false, message: "Failed to send verification email" };
+//   }
    if (!emailresponse.success){
     return Response.json({success:false,message:emailresponse.message},
         {
