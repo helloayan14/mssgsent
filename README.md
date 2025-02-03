@@ -1,48 +1,45 @@
 # mssgsent
 
-mssgsent is a full-stack web application built with Next.js and TypeScript that allows users to receive anonymous messages via a unique URL. The platform leverages AI to generate messages and ensures secure authentication and email verification.
+mssgsent is a Next.js and TypeScript-powered web application that allows users to send messages to themselves, store them securely, and receive reminders. It also features AI-powered message suggestions using the Cohere AI API.
 
-## Features
+## 🚀 Features
 
-- **Anonymous Messaging**: Users can receive messages through a unique URL.
-- **AI-Powered Message Generation**: Uses Cohere AI to generate messages.
-- **Authentication**: Secure login and session management with NextAuth.
-- **Email Verification**: Resend is used for email verification.
-- **Database**: MongoDB for data storage.
+- 📩 **Send Messages to Yourself** – Save personal notes, reminders, or thoughts.
+- 🔄 **CRUD Operations** – Create, update, delete, and manage messages.
+- 🤖 **AI Message Suggestions** – Get smart message recommendations with Cohere AI.
+- 🔑 **Authentication** – Secure sign-in using NextAuth and custom signup.
+- ✉️ **Email Verification** – Sign-up verification via Brevo (Gmail SMTP app password).
+- 🛢️ **MongoDB Database** – Efficient and scalable data storage.
+- 🌐 **Deployed on Vercel** – Fast and reliable hosting.
 
-## Tech Stack
+## 🛠️ Tech Stack
 
-- **Frontend**: Next.js, TypeScript
-- **Backend**: Next.js API routes, MongoDB
-- **Authentication**: NextAuth
-- **AI Integration**: Cohere AI
-- **Email Services**: Resend
-- **Deployment**: [ Vercel]
+- **Frontend:** Next.js, React, TypeScript
+- **Backend:** Next.js API Routes, MongoDB, Express-like API handling
+- **Auth:** NextAuth (OAuth & credentials-based)
+- **Email Service:** Brevo (via Gmail SMTP)
+- **AI Integration:** Cohere AI API
+- **Deployment:** Vercel
 
-## Installation
-
+## 🔧 Installation & Setup
 
 1. Clone the repository:
-
    ```sh
-   git clone https://github.com/helloayan14/mssgsent.git
-   cd mssgsent   
-   
-2.Install dependencies   
+   git clone https://github.com/yourusername/mssgsent.git
+   cd mssgsent
+## Install dependencies 
 npm install
-# or
-yarn install
+NEXTAUTH_URL=<your-vercel-deployment-url or local host url>
+MONGODB_URI=<your-mongodb-connection-string>
+COHERE_API_KEY=<your-cohere-api-key>
+SMTP_EMAIL=<your-gmail-email>
+SMTP_PASSWORD=<your-app-password>
 
-3.Setup .env.local file
-NEXTAUTH_SECRET=your_secret
-NEXTAUTH_URL=http://localhost:3000
-COHERE_API_KEY=your_cohere_key
-RESEND_API_KEY=your_resend_key
-MONGODB_URI=your_mongodb_uri
-4.Run the Developement server
+## Run the Development server
 npm run dev
-# or
-yarn dev
 
-5.Open http://localhost:3000 in your browser.
+## Open http://localhost:3000 in your browser.
+## 🌍 Live Demo
+Check out the live project: https://mssgsent.vercel.app/
+
 
